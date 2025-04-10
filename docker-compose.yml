@@ -1,13 +1,13 @@
 services:
-  mongo:
+  mongo_cache:
     image: mongo
-    container_name: training.mongo
+    container_name: training.mongo_cache
     restart: always
     ports:
       - 27017:27017
     volumes:
-      - mongo_data_db:/data/db
-      - mongo_config_db:/data/configdb
+      - mongo_cache_data_db:/data/db
+      - mongo_cache_config_db:/data/configdb
 
   p01_basic:
     build:
@@ -17,9 +17,11 @@ services:
     ports:
       - 8080:8080
     restart: on-failure
+    environment:
+      MONGO_CACHE_URL : "mongodb://training.mongo_cache:27017"
     depends_on:
-      - mongo
+      - mongo_cache
 
 volumes:
-  mongo_data_db:
-  mongo_config_db:
+  mongo_cache_data_db:
+  mongo_cache_config_db:
