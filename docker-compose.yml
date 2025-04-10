@@ -1,0 +1,26 @@
+services:
+  mongo:
+    image: mongo
+    container_name: training.mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data_db:/data/db
+      - mongo_config_db:/data/configdb
+
+  p01_basic:
+    build:
+      context: ./P01_BASICS
+      dockerfile: ./Dockerfile
+    container_name: training.web
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data_db:
+  mongo_config_db:
