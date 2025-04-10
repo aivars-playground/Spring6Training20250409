@@ -6,7 +6,10 @@ builds multiple docker images
 docker compose up -d
 ```
 
-Spring webapp can be started from the source (but training.web image must be stopped)
+Spring webapp can be started from the source, demo_webapp_service must be stopped
+```shell
+docker compose stop demo_webapp_service
+```
 
 Spring webapp project can be run outside the Docker (using Mongo localhost:27017 running in docker)
 ```shell
