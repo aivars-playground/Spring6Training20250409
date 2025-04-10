@@ -18,7 +18,7 @@ Spring webapp project can be conteinarized to run in docker and use internal net
 ```shell
 cd webapp
 docker build -t standalone-webapp .
-docker run --network spring6training20250409_default --publish 8080:8080 -e MONGO_CACHE_URL='mongodb://demo_mongo_cache_service:27017' --name my-standalone-webapp standalone-webapp
+docker run --network demo-infrastructure_demo-network --publish 8080:8080 -e MONGO_CACHE_URL='mongodb://demo_mongo_cache_service:27017' --name my-standalone-webapp standalone-webapp
 ```
 
 Spring webapp can be started from IntelliJ runner:

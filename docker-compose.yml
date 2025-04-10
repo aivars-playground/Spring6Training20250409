@@ -1,4 +1,5 @@
 services:
+
   demo_mongo_cache_service:
     image: mongo
     container_name: demo_mongo_cache_service
@@ -8,6 +9,9 @@ services:
     volumes:
       - mongo_cache_data_db:/data/db
       - mongo_cache_config_db:/data/configdb
+    networks:
+      - demo-network
+
   demo_webapp_service:
     build:
       context: ./webapp
@@ -20,7 +24,15 @@ services:
       MONGO_CACHE_URL : "mongodb://demo_mongo_cache_service:27017"
     depends_on:
       - demo_mongo_cache_service
+    networks:
+      - demo-network
 
 volumes:
   mongo_cache_data_db:
   mongo_cache_config_db:
+
+networks:
+  demo-network:
+
+name:
+  demo-infrastructure
