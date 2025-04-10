@@ -1,26 +1,25 @@
 services:
-  mongo_cache:
+  demo_mongo_cache_service:
     image: mongo
-    container_name: training.mongo_cache
+    container_name: demo_mongo_cache_service
     restart: always
     ports:
       - 27017:27017
     volumes:
       - mongo_cache_data_db:/data/db
       - mongo_cache_config_db:/data/configdb
-
-  p01_basic:
+  demo_webapp_service:
     build:
-      context: ./P01_BASICS
+      context: ./webapp
       dockerfile: ./Dockerfile
-    container_name: training.web
+    container_name: demo_webapp_service
     ports:
       - 8080:8080
     restart: on-failure
     environment:
-      MONGO_CACHE_URL : "mongodb://training.mongo_cache:27017"
+      MONGO_CACHE_URL : "mongodb://demo_mongo_cache_service:27017"
     depends_on:
-      - mongo_cache
+      - demo_mongo_cache_service
 
 volumes:
   mongo_cache_data_db:

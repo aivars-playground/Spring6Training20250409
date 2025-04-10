@@ -1,0 +1,28 @@
+Experimenting with Docker Build
+====
+
+builds multiple docker images
+```shell
+docker compose up -d
+```
+
+Spring webapp can be started from the source (but training.web image must be stopped)
+
+Spring webapp project can be run outside the Docker (using Mongo localhost:27017 running in docker)
+```shell
+cd webapp
+./mvnw spring-boot:run
+```
+
+Spring webapp project can be conteinarized to run in docker and use internal network
+```shell
+cd webapp
+docker build -t standalone-webapp .
+docker run --network spring6training20250409_default --publish 8080:8080 -e MONGO_CACHE_URL='mongodb://demo_mongo_cache_service:27017' --name my-standalone-webapp standalone-webapp
+```
+
+Spring webapp can be started from IntelliJ runner:
+* create new run configuration
+* select from docker-compose
+* select parent docker compose file (select web service)
+* environment values will be picked from compose file

@@ -1,7 +1,7 @@
 FROM openjdk:24-jdk AS build
 WORKDIR /app
 COPY ./ ./
-RUN ./mvnw package
+RUN --mount=type=cache,target=/root/.m2,rw ./mvnw package
 
 FROM openjdk:24-jdk AS final
 WORKDIR /app
