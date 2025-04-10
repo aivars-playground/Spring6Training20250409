@@ -21,8 +21,15 @@ docker build -t standalone-webapp .
 docker run --network demo-infrastructure_demo-network --publish 8080:8080 -e MONGO_CACHE_URL='mongodb://demo_mongo_cache_service:27017' --name my-standalone-webapp standalone-webapp
 ```
 
-Spring webapp can be started from IntelliJ runner:
+Spring webapp can be started from IntelliJ runner in docker-compose mode:
 * create new run configuration
 * select from docker-compose
 * select parent docker compose file (select web service)
 * environment values will be picked from compose file
+
+Spring webapp can be started from IntelliJ runner in docker mode:
+* create new run configuration
+* select from docker
+* pull openjdk:24-jdk
+* run options
+* ```--network demo-infrastructure_demo-network --publish 8080:8080 -e MONGO_CACHE_URL=mongodb://demo_mongo_cache_service:27017 --name my-standalone-webapp --rm```
