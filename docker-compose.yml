@@ -1,6 +1,7 @@
 name: demo-infrastructure
 
 services:
+
   demo_mongo_cache_service:
     image: mongo
     container_name: demo_mongo_cache_service
@@ -12,6 +13,7 @@ services:
       - mongo_cache_config_db:/data/configdb
     networks:
       - demo-network
+
   demo_webapp_service:
     build:
       context: ./webapp
